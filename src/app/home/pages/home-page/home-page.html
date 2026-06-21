@@ -1,0 +1,60 @@
+<div class="px-8 py-4 flex gap-2 items-center">
+    <div class="w-full bg-[#EFF4FF] rounded-lg py-3 px-3 border-2 border-[#C6C6CD] text-primary flex items-center gap-2">
+        <i class="fas fa-search"></i>
+        <input
+            class="bg-secondary w-full appearance-none focus-within:outline-none"
+            type="text"
+            placeholder="Buscar por nombre de inversión"
+        >
+    </div>
+    <div class="flex gap-2">
+        <button class="px-2 py-1 bg-[#0051D5] text-white rounded-md">Buscar</button>
+        <button class="px-2 py-1 bg-[#C6C6CD] text-[#0B1C30] rounded-md">Limpiar</button>
+    </div>
+</div>
+<main class="flex flex-col gap-2 px-8 py-6 border-t-2 border-[#C6C6CD]">
+    <header>
+        <h2 class="text-3xl font-semibold text-[#0B1C30]">Inversiones Públicas</h2>
+        <p class="mt-2">Datos de inversiones del Banco de Inversiones desde el año 2001 al 2023, con su información detallada.</p>
+    </header>
+    <div>
+        filtros
+    </div>
+    <div class="grid xl:grid-cols-3 gap-5">
+        @for (detalleInversion of inversionesResource.value()?.records; track $index) {
+            <div class="bg-white p-4 rounded-2xl border-2 flex flex-col gap-2 border-[#C6C6CD]">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-1 rounded-sm bg-[#D3E4FE] text-[#0051D5] font-semibold lowercase first-letter:uppercase"> {{ detalleInversion.PROGRAMA }} </span>
+                    <span class="px-2 py-1 rounded-sm bg-[#F0FDF4] text-[#15803D] font-semibold lowercase first-letter:uppercase"> {{ detalleInversion.SITUACION }} </span>
+                </div>
+                <h3 class="text-md font-bold text-[#0B1C30] line-clamp-2 lowercase first-letter:uppercase">{{ detalleInversion.NOMBRE_INVERSION }}</h3>
+                <div class="flex text-sm items-center text-[#45464D]">
+                    <i class="fa-solid fa-location-dot mr-2"></i>
+                    <span class="lowercase first-letter:uppercase mr-1">{{detalleInversion.PROVINCIA}},</span> <span class="lowercase first-letter:uppercase">{{ detalleInversion.DEPARTAMENTO }}</span>
+                </div>
+                <span class="bg-[#C6C6CD] h-px w-full"></span>
+                <div>
+                    <div class="flex justify-between">
+                        <p class="font-bold text-sm uppercase text-[#45464D]">Costo Actualizado</p>
+                        <span class="font-bold text-xl text-[#0051D5]"> {{ detalleInversion.COSTO_ACTUALIZADO | currency:'PEN':'symbol':'1.2-2'  }}</span>
+                    </div>
+                    @if (detalleInversion.TIENE_AVAN_FISICO === "SI") {
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                            <div 
+                                class="bg-blue-600 h-2.5 rounded-full transition-all duration-500 ease-out"
+                                [style.width.%]="+detalleInversion.AVANCE_FISICO">
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="font-semibold text-[#76777D]">Avance Físico</p>
+                            <span class="font-bold text-[#76777D]"> {{ detalleInversion.AVANCE_FISICO }}%</span>
+                        </div>
+                        
+                    }@else {
+                        <span class="font-bold text-[#76777D]">No tiene avance físico</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</main>
