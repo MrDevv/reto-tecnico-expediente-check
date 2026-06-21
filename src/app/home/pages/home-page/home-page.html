@@ -1,15 +1,18 @@
 <div class="px-8 py-4 flex gap-2 items-center">
     <div class="w-full bg-[#EFF4FF] rounded-lg py-3 px-3 border-2 border-[#C6C6CD] text-primary flex items-center gap-2">
         <i class="fas fa-search"></i>
-        <input
-            class="bg-secondary w-full appearance-none focus-within:outline-none"
-            type="text"
-            placeholder="Buscar por nombre de inversión"
-        >
+        <form class="w-full" [formGroup]="formInversiones">
+            <input
+                class="bg-secondary w-full appearance-none focus-within:outline-none"
+                type="text"
+                placeholder="Buscar por nombre de inversión"
+                formControlName="nombreInversion"
+            >
+        </form>
     </div>
     <div class="flex gap-2">
-        <button class="px-2 py-1 bg-[#0051D5] text-white rounded-md">Buscar</button>
-        <button class="px-2 py-1 bg-[#C6C6CD] text-[#0B1C30] rounded-md">Limpiar</button>
+        <button (click)="buscarInversionPorNombre()" class="px-2 py-1 bg-[#0051D5] text-white rounded-md">Buscar</button>
+        <button (click)="limpiarInput()" class="px-2 py-1 bg-[#C6C6CD] text-[#0B1C30] rounded-md">Limpiar</button>
     </div>
 </div>
 <main class="flex flex-col gap-2 px-8 py-6 border-t-2 border-[#C6C6CD]">
@@ -21,7 +24,7 @@
         filtros
     </div>
     <div class="grid xl:grid-cols-3 gap-5">
-        @for (detalleInversion of inversionesResource.value()?.records; track $index) {
+        @for (detalleInversion of inversiones(); track $index) {
             <div class="bg-white p-4 rounded-2xl border-2 flex flex-col gap-2 border-[#C6C6CD]">
                 <div class="flex items-center gap-2">
                     <span class="px-2 py-1 rounded-sm bg-[#D3E4FE] text-[#0051D5] font-semibold lowercase first-letter:uppercase"> {{ detalleInversion.PROGRAMA }} </span>
@@ -58,3 +61,7 @@
         }
     </div>
 </main>
+
+@if (isLoading()) {
+    <loading/>
+}
