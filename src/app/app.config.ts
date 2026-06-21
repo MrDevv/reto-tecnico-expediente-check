@@ -2,9 +2,10 @@ import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeEsPe from '@angular/common/locales/es-PE';
+import { Interceptor } from './core/interceptors/interceptor';
 
 
 localeEsPe[11] = ' '; 
@@ -14,7 +15,7 @@ registerLocaleData(localeEsPe, 'es-PE');
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'es-PE' },
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([Interceptor])),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes)
   ]
