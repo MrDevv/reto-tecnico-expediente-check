@@ -37,3 +37,19 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Terraform
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/terraform.tfvars
+**/crash.log
+**/override.tf
+**/override.tf.json

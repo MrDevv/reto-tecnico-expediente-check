@@ -1,0 +1,4 @@
+project_id      = "tu-project-id-prod"
+project_name    = "MEF Inversiones Prod"
+region          = "us-central1"
+billing_account = "XXXXXX-XXXXXX-XXXXXX"

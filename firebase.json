@@ -17,7 +17,7 @@
     }
   ],
   "hosting": {
-    "public": "public",
+    "public": "dist/reto-tecnico-expediente-check/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
