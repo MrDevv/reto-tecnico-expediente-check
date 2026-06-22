@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "dev": "mef-inversiones-mrdevv-dev",
+    "pro": "mef-inversiones-mrdevv-prod"
+  },
+  "targets": {},
+  "etags": {}
+}
