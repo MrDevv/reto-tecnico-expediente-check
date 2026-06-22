@@ -2,8 +2,8 @@
 
 Aplicación Angular que consume el dataset público **["Detalle de inversiones"](https://datosabiertos.mef.gob.pe/dataset/detalle-de-inversiones)** de Datos Abiertos del MEF, desplegada en Firebase Hosting, con un proxy (Cloud Function) para resolver el problema de CORS, e infraestructura provisionada con Terraform en dos ambientes (dev/prod).
 
-**URL pública (dev) (version producto final):** https://mef-inversiones-mrdevv-dev.web.app/
-**URL pública (prod):** https://mef-inversiones-mrdevv-prod.web.app/
+- **URL pública (dev) (version producto final):** https://mef-inversiones-mrdevv-dev.web.app/
+- **URL pública (prod):** https://mef-inversiones-mrdevv-prod.web.app/
 
 ## Arquitectura de sistema
 ![arquitectura](arquitectura.png)
