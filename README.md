@@ -12,7 +12,8 @@ Aplicación Angular que consume el dataset público **["Detalle de inversiones"]
 
 | Capa | Tecnología |
 |---|---|
-| Frontend | Angular 20 (standalone, signals) |
+| UI | Stitch - Diseño con IA y Figma |
+| Frontend | Angular 21 (standalone, signals) |
 | Backend/proxy | Firebase Cloud Functions |
 | Hosting | Firebase Hosting |
 | Infraestructura | Terraform (dev/prod) |
