@@ -105,7 +105,7 @@ gcloud billing accounts list
 
 ### 2. Configura las variables del ambiente
 
-## Ya sea para configurar el ambiente de dev o prod dentro de `infra/dev` o `infra/prod`, para este ejemplo haremos el de dev.
+##### Ya sea para configurar el ambiente de dev o prod dentro de `infra/dev` o `infra/prod`, para este ejemplo haremos el de dev.
 
 Crea una copia del archivo de ejemplo `terraform.tfvars.example` y elimina la palabra example de manera que quede como `terraform.tfvars`.
 
