@@ -60,22 +60,20 @@ export class HomePage {
     }
 
     async seleccionarDepartamento(departamento: string) {
-      console.log('filtrando por departamento');
-      console.log(departamento);
       
       if (this.departamentoSeleccionado() === departamento) {
-        console.log('deseleccionar');
         this.departamentoSeleccionado.set(null);
       }else {
         this.departamentoSeleccionado.set(departamento);
-        console.log(this.departamentoSeleccionado());
       }    
 
       try { 
         this.isLoading.set(true);
-        console.log('buscando un deparamento');
+
+        const nombre = this.formInversiones.get('nombreInversion')?.value || '';
+        const departamento = this.departamentoSeleccionado();
         
-        const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones('', this.departamentoSeleccionado() || ''));
+        const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones(nombre, departamento || ''));
         this.inversiones.set(response.records);
         this.totalElements.set(response.result.include_total);
       } catch (error) {

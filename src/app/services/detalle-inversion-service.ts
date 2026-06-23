@@ -11,9 +11,7 @@ export class DetalleInversionService {
 
   private http = inject(HttpClient);
 
-  obtenerDetalleInversiones(q: string = '', departamento: string = ''): Observable<ResponseDetalleInversion> {
-    console.log({q, departamento});
-    
+  obtenerDetalleInversiones(q: string = '', departamento: string = ''): Observable<ResponseDetalleInversion> {    
     return this.http.get<ResponseDetalleInversion>(environment.apiURL, {
       params: {
         limit: '9',
