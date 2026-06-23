@@ -5,7 +5,7 @@ Aplicación Angular que consume el dataset público **["Detalle de inversiones"]
 - **URL pública (dev) (versión producto final):** https://mef-inversiones-mrdevv-dev.web.app/
 - **URL pública (prod):** https://mef-inversiones-mrdevv-prod.web.app/
 
-## Aplicación final
+## Aplicación final (entorno dev)
 ![aplicacion](imagen_aplicacion_final.png)
 
 ## Arquitectura de sistema
