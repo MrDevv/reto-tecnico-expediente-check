@@ -1,3 +1,6 @@
+# Este archivo es el que invoca el módulo y le pasa los valores.
+
+# 1. Declara qué providers de Terraform usar (google y google-beta)
 terraform {
   required_version = ">= 1.5"
   required_providers {
@@ -16,11 +19,13 @@ provider "google-beta" {
   region  = var.region
 }
 
+# 2. Declara las variables que va a recibir del .tfvars
 variable "project_id" { type = string }
 variable "project_name" { type = string }
 variable "region" { type = string }
 variable "billing_account" { type = string }
 
+# 3. Llama al módulo pasándole esas variables
 module "firebase_app" {
   source          = "../../modules/firebase-app"
   project_id      = var.project_id
