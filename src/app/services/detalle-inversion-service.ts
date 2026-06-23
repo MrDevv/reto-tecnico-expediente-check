@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ResponseDetalleInversion } from '../home/interfaces/response-detalle-inversion';
-import { catchError, delay, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +11,16 @@ export class DetalleInversionService {
 
   private http = inject(HttpClient);
 
-  obtenerDetalleInversiones(q: string = ''): Observable<ResponseDetalleInversion> {
+  obtenerDetalleInversiones(q: string = '', departamento: string = ''): Observable<ResponseDetalleInversion> {
+    console.log({q, departamento});
+    
     return this.http.get<ResponseDetalleInversion>(environment.apiURL, {
       params: {
         limit: '9',
-        q: q
+        q: q,
+        departamento: departamento
       }
     }).pipe(
-      delay(3000),
       catchError(error => {
         return throwError(() => error); 
       }

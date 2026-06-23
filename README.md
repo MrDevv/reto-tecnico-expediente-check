@@ -1,9 +1,12 @@
 # Reto Tecnico ExpedienteCheck
 
-Aplicación Angular que consume el dataset público **["Detalle de inversiones"](https://datosabiertos.mef.gob.pe/dataset/detalle-de-inversiones)** de Datos Abiertos del MEF, desplegada en Firebase Hosting, con un proxy (Cloud Function) para resolver el problema de CORS, e infraestructura provisionada con Terraform en dos ambientes (dev/prod).
+Aplicación Angular que consume el dataset público **["Detalle de inversiones"](https://datosabiertos.mef.gob.pe/dataset/detalle-de-inversiones)** de Datos Abiertos del MEF mostrando cada inversión por tarjeta, incluyendo datos como el programa, situación, nombre inversión, departamento, provincia, costo actualizado y porcentaje físico en caso tenga. Esta desplegada en Firebase Hosting, con un proxy (Cloud Function) para resolver el problema de CORS, e infraestructura provisionada con Terraform en dos ambientes (dev/prod).
 
-- **URL pública (dev) (version producto final):** https://mef-inversiones-mrdevv-dev.web.app/
+- **URL pública (dev) (versión producto final):** https://mef-inversiones-mrdevv-dev.web.app/
 - **URL pública (prod):** https://mef-inversiones-mrdevv-prod.web.app/
+
+## Aplicación final
+![aplicacion](imagen_aplicacion_final.png)
 
 ## Arquitectura de sistema
 ![arquitectura](arquitectura.png)

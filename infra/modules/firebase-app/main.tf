@@ -1,3 +1,6 @@
+# Define que recursos de GCP/Firebase se crean
+
+# proyecto GCP
 resource "google_project" "default" {
   project_id      = var.project_id
   name            = coalesce(var.project_name, var.project_id)
@@ -16,6 +19,7 @@ locals {
   ]
 }
 
+# Habilita las APIs necesarias para Firebase
 resource "google_project_service" "apis" {
   for_each = toset(local.apis)
   project  = google_project.default.project_id
@@ -24,6 +28,7 @@ resource "google_project_service" "apis" {
   disable_on_destroy = false
 }
 
+# registra el proyecto como proyecto Firebase
 resource "google_firebase_project" "default" {
   provider = google-beta
   project  = google_project.default.project_id
@@ -31,6 +36,7 @@ resource "google_firebase_project" "default" {
   depends_on = [google_project_service.apis]
 }
 
+# la web app de Firebase
 resource "google_firebase_web_app" "default" {
   provider     = google-beta
   project      = google_project.default.project_id
@@ -39,6 +45,7 @@ resource "google_firebase_web_app" "default" {
   depends_on = [google_firebase_project.default]
 }
 
+# el sitio de hosting
 resource "google_firebase_hosting_site" "default" {
   provider = google-beta
   project  = google_project.default.project_id

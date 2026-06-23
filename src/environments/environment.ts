@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiURL: 'https://us-central1-mef-inversiones-mrdevv-dev.cloudfunctions.net/mefProxy'
+    apiURL: 'https://mefproxy-dq6ve6isgq-uc.a.run.app'
 };

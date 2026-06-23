@@ -18,11 +18,26 @@
 <main class="flex flex-col gap-2 px-8 py-6 border-t-2 border-[#C6C6CD]">
     <header>
         <h2 class="text-3xl font-semibold text-[#0B1C30]">Inversiones Públicas</h2>
-        <p class="mt-2">Datos de inversiones del Banco de Inversiones desde el año 2001 al 2023, con su información detallada.</p>
+        <div class="flex gap-2 mt-2 justify-between items-center">
+            <p>Datos de inversiones del Banco de Inversiones desde el año 2001 al 2023, con su información detallada.</p>
+        </div>
     </header>
-    <div>
-        filtros
+    <div class="flex gap-2 flex-col bg-[#EFF4FF] p-2 rounded-2xl border-2 border-[#C6C6CD]">
+        <h2 class="text-md font-bold text-[#0B1C30]">DEPARTAMENTOS:</h2>
+        <div class="flex gap-2 flex-wrap">
+            @for (departamento of departamentos(); track $index) {
+                <div 
+                    class="cursor-pointer text-sm
+                         bg-[#DBE1FF] text-[#00174B] font-semibold flex items-center rounded-lg px-2 py-1 text-primary text-center"
+                    [class.outline-2]="departamentoSeleccionado() === departamento"
+                    (click)="seleccionarDepartamento(departamento)">
+                    <h3>{{ departamento }}</h3>
+                </div>
+            }
+        </div>
+
     </div>
+    <p class="text-end">Se muestran {{ inversiones() ? inversiones().length : 0 }} registros de un total de {{ totalElements() }}</p>
     <div class="grid xl:grid-cols-3 gap-5">
         @for (detalleInversion of inversiones(); track $index) {
             <div class="bg-white p-4 rounded-2xl border-2 flex flex-col gap-2 border-[#C6C6CD]">
@@ -33,7 +48,7 @@
                 <h3 class="text-md font-bold text-[#0B1C30] line-clamp-2 lowercase first-letter:uppercase">{{ detalleInversion.NOMBRE_INVERSION }}</h3>
                 <div class="flex text-sm items-center text-[#45464D]">
                     <i class="fa-solid fa-location-dot mr-2"></i>
-                    <span class="lowercase first-letter:uppercase mr-1">{{detalleInversion.PROVINCIA}},</span> <span class="lowercase first-letter:uppercase">{{ detalleInversion.DEPARTAMENTO }}</span>
+                    <span class="lowercase first-letter:uppercase mr-1">{{ detalleInversion.DEPARTAMENTO }},</span> <span class="lowercase first-letter:uppercase">{{ detalleInversion.PROVINCIA }}</span>
                 </div>
                 <span class="bg-[#C6C6CD] h-px w-full"></span>
                 <div>

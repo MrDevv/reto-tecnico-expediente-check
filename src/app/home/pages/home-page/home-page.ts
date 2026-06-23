@@ -7,6 +7,34 @@ import { DetalleInversion } from '../../interfaces/response-detalle-inversion';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+const DEPARTAMENTOS: string[] = [
+  'AREQUIPA',
+  'ANCASH',
+  'HUANUCO',
+  'PUNO',
+  'JUNIN',
+  'AYACUCHO',
+  'HUANCAVELICA',
+  'SAN MARTIN',
+  'UCAYALI',
+  'ICA',
+  'LORETO',
+  'TACNA',
+  'APURIMAC',
+  'CUSCO',
+  'LIMA',
+  'CAJAMARCA',
+  'AMAZONAS',
+  'PIURA',
+  'CALLAO',
+  'LA LIBERTAD',
+  'TUMBES',
+  'LAMBAYEQUE',
+  'MOQUEGUA',
+  'PASCO',
+  'MADRE DE DIOS',
+  '-MUL.DEP-'
+];
 
 @Component({
   selector: 'app-home-page',
@@ -19,6 +47,9 @@ export class HomePage {
 
     public inversiones = signal<DetalleInversion[]>([]);
     public isLoading = signal(false);
+    public departamentoSeleccionado = signal<null | string>(null);
+    public departamentos = signal<string[]>(DEPARTAMENTOS);
+    public totalElements = signal(0);
 
     formInversiones = this.fb.group({
       nombreInversion: ['', Validators.required]
@@ -28,11 +59,38 @@ export class HomePage {
       this.obtenerDetalleInversiones();
     }
 
+    async seleccionarDepartamento(departamento: string) {
+      console.log('filtrando por departamento');
+      console.log(departamento);
+      
+      if (this.departamentoSeleccionado() === departamento) {
+        console.log('deseleccionar');
+        this.departamentoSeleccionado.set(null);
+      }else {
+        this.departamentoSeleccionado.set(departamento);
+        console.log(this.departamentoSeleccionado());
+      }    
+
+      try { 
+        this.isLoading.set(true);
+        console.log('buscando un deparamento');
+        
+        const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones('', this.departamentoSeleccionado() || ''));
+        this.inversiones.set(response.records);
+        this.totalElements.set(response.result.include_total);
+      } catch (error) {
+        console.error('Error al filtrar por departamento:', error);
+      } finally {
+        this.isLoading.set(false);
+      }
+    }
+
     async obtenerDetalleInversiones() {
       this.isLoading.set(true);
       try {
         const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones());
         this.inversiones.set(response.records);
+        this.totalElements.set(response.result.include_total)
       }catch (error) {
         console.error('Error al obtener las inversiones:', error);
       } finally {
@@ -42,20 +100,13 @@ export class HomePage {
 
     async buscarInversionPorNombre() {
       const nombre = this.formInversiones.get('nombreInversion')?.value || '';
-      if (nombre.length < 5) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Búsqueda insuficiente',
-          text: 'Por favor, ingresa al menos 5 caracteres para realizar la búsqueda.',
-        });
-        return;
-      }
-
+      const departamento = this.departamentoSeleccionado();
 
       this.isLoading.set(true);
       try {
-        const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones(nombre));
+        const response = await firstValueFrom(this.inversionService.obtenerDetalleInversiones(nombre, departamento || ''));
         this.inversiones.set(response.records);
+        this.totalElements.set(response.result.include_total)
       } catch (error) {
         console.error('Error al buscar la inversión:', error);
       } finally {
@@ -66,5 +117,4 @@ export class HomePage {
     limpiarInput() {
       this.formInversiones.reset();
     }
-
 }

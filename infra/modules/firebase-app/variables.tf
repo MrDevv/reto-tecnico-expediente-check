@@ -1,3 +1,4 @@
+# Este archivo define las variables necesarias para configurar un proyecto de Firebase.
 variable "project_id" {
   type        = string
   description = "ID único del proyecto GCP/Firebase"

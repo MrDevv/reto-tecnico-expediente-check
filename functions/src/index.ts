@@ -11,10 +11,11 @@ export const mefProxy = onRequest({ cors: true }, async (req, res) => {
   const resourceId = (req.query.resource_id as string) ?? DEFAULT_RESOURCE_ID;
   const limit = (req.query.limit as string) ?? "20";
   const q = req.query.q as string | undefined;
+  const departamento = req.query.departamento as string | undefined;
 
   const params = new URLSearchParams({ resource_id: resourceId, limit });
   if (q) params.set("q", q);
-
+  if (departamento) params.set("filters", JSON.stringify({ DEPARTAMENTO: departamento }));
   const targetUrl = `${MEF_BASE}?${params.toString()}`;
   logger.info("Consultando API MEF", { targetUrl });
 
