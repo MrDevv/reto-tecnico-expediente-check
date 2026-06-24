@@ -1,0 +1,33 @@
+<div class="bg-white p-4 rounded-2xl border-2 flex flex-col gap-2 border-[#C6C6CD]">
+    <div class="flex items-center gap-2">
+        <span class="px-2 py-1 rounded-sm bg-[#D3E4FE] text-[#0051D5] font-semibold lowercase first-letter:uppercase"> {{ detalleInversion()?.PROGRAMA }} </span>
+        <span class="px-2 py-1 rounded-sm bg-[#F0FDF4] text-[#15803D] font-semibold lowercase first-letter:uppercase"> {{ detalleInversion()?.SITUACION }} </span>
+    </div>
+    <h3 class="text-md font-bold text-[#0B1C30] line-clamp-2 lowercase first-letter:uppercase">{{ detalleInversion()?.NOMBRE_INVERSION }}</h3>
+    <div class="flex text-sm items-center text-[#45464D]">
+        <i class="fa-solid fa-location-dot mr-2"></i>
+        <span class="lowercase first-letter:uppercase mr-1">{{ detalleInversion()?.DEPARTAMENTO }},</span> <span class="lowercase first-letter:uppercase">{{ detalleInversion()?.PROVINCIA }}</span>
+    </div>
+    <span class="bg-[#C6C6CD] h-px w-full"></span>
+    <div>
+        <div class="flex justify-between">
+            <p class="font-bold text-sm uppercase text-[#45464D]">Costo Actualizado</p>
+            <span class="font-bold text-xl text-[#0051D5]"> {{ detalleInversion()?.COSTO_ACTUALIZADO | currency:'PEN':'symbol':'1.2-2'  }}</span>
+        </div>
+        @if (detalleInversion()?.TIENE_AVAN_FISICO === "SI") {
+            <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                <div 
+                    class="bg-blue-600 h-2.5 rounded-full transition-all duration-500 ease-out"
+                    [style.width.%]="detalleInversion() != null ? +detalleInversion()!.AVANCE_FISICO : 0">
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <p class="font-semibold text-[#76777D]">Avance Físico</p>
+                <span class="font-bold text-[#76777D]"> {{ detalleInversion()?.AVANCE_FISICO }}%</span>
+            </div>
+            
+        }@else {
+            <span class="font-bold text-[#76777D]">No tiene avance físico</span>
+        }
+    </div>
+</div>

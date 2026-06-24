@@ -6,6 +6,7 @@ import { Loading } from '../../../shared/components/loading/loading';
 import { DetalleInversion } from '../../interfaces/response-detalle-inversion';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { InversionCard } from "../../components/inversion-card/inversion-card";
 
 const DEPARTAMENTOS: string[] = [
   'AREQUIPA',
@@ -38,7 +39,7 @@ const DEPARTAMENTOS: string[] = [
 
 @Component({
   selector: 'app-home-page',
-  imports: [CurrencyPipe, Loading, ReactiveFormsModule],
+  imports: [Loading, ReactiveFormsModule, InversionCard],
   templateUrl: './home-page.html',
 })
 export class HomePage {
